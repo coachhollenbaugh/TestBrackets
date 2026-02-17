@@ -1,92 +1,51 @@
 
         <!DOCTYPE html>
-        <html lang="en">
+        <html>
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>B48 Bracket</title>
             <style>
-                body { font-family: sans-serif; background: #121212; color: white; padding: 20px; }
-                .bracket-container { display: flex; gap: 40px; overflow-x: auto; padding-bottom: 20px; }
-                .round { display: flex; flex-direction: column; justify-content: space-around; min-width: 200px; }
-                .match { 
-                    background: #2c3e50; border: 1px solid #34495e; padding: 10px; 
-                    margin: 10px 0; border-radius: 8px; font-size: 0.9em; 
+                body { background: #121212; color: white; font-family: 'Segoe UI', sans-serif; padding: 30px; }
+                .bracket-wrapper { display: flex; flex-direction: row; gap: 20px; align-items: stretch; }
+                .round-column { display: flex; flex-direction: column; justify-content: space-around; min-width: 200px; }
+                .round-title { text-align: center; color: #f1c40f; font-size: 1.2em; margin-bottom: 20px; border-bottom: 2px solid #333; }
+                .match-box { 
+                    background: #1e272e; border: 1px solid #3d4e5d; border-radius: 6px; 
+                    padding: 10px; margin: 15px 0; position: relative; font-size: 0.9em;
                 }
-                .match-header { font-weight: bold; color: #f1c40f; border-bottom: 1px solid #444; margin-bottom: 5px; }
-                .player { display: flex; justify-content: space-between; padding: 2px 0; }
+                .match-id { font-size: 0.75em; color: #888; margin-bottom: 5px; border-bottom: 1px solid #333; }
+                .player { display: flex; justify-content: space-between; padding: 3px 0; }
                 .winner { color: #2ecc71; font-weight: bold; }
-                .score { background: #1a252f; padding: 0 5px; border-radius: 3px; }
-                .back-btn { display: inline-block; margin-bottom: 20px; color: #3498db; text-decoration: none; }
+                .score { background: #000; padding: 0 5px; border-radius: 3px; min-width: 20px; text-align: center; }
+                .back-link { color: #3498db; text-decoration: none; margin-bottom: 20px; display: inline-block; }
             </style>
+            <title>B48 Bracket</title>
         </head>
         <body>
-            <a href="index.html" class="back-btn">← Back to Weight Classes</a>
-            <h1>Weight Class: B48</h1>
-            <div class="bracket-container">
-        <div class="round"><h3>Round 3</h3>
-                <div class="match">
-                    <div class="match-header">Bout 0</div>
+            <a href="index.html" class="back-link">← Back to Menu</a>
+            <h1>B48 lbs Bracket</h1>
+            <div class="bracket-wrapper">
+        <div class="round-column"><div class="round-title">Round 9</div>
+                <div class="match-box">
+                    <div class="match-id">BOUT 227</div>
                     <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>Bye</span><span class="score">0</span>
-                    </div>
-                </div>
-                
-                <div class="match">
-                    <div class="match-header">Bout 207</div>
-                    <div class="player ">
-                        <span>Rhett Muse</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>Thomas Donovan</span><span class="score">0</span>
-                    </div>
-                </div>
-                
-                <div class="match">
-                    <div class="match-header">Bout 208</div>
-                    <div class="player ">
-                        <span>Rosalie Curry</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>Leland Sullivan</span><span class="score">0</span>
-                    </div>
-                </div>
-                </div><div class="round"><h3>Round 4</h3>
-                <div class="match">
-                    <div class="match-header">Bout 209</div>
-                    <div class="player ">
-                        <span>Geovanni Alvarez</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>Thomas Donovan</span><span class="score">0</span>
-                    </div>
-                </div>
-                
-                <div class="match">
-                    <div class="match-header">Bout 0</div>
-                    <div class="player ">
-                        <span>Bye</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>Leland Sullivan</span><span class="score">0</span>
-                    </div>
-                </div>
-                
-                <div class="match">
-                    <div class="match-header">Bout 210</div>
-                    <div class="player ">
-                        <span>Rhett Muse</span><span class="score">0</span>
                     </div>
                     <div class="player ">
                         <span>Rosalie Curry</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round"><h3>Round 6</h3>
-                <div class="match">
-                    <div class="match-header">Bout 217</div>
+                
+                <div class="match-box">
+                    <div class="match-id">BOUT 228</div>
+                    <div class="player ">
+                        <span>Leland Sullivan</span><span class="score">0</span>
+                    </div>
+                    <div class="player ">
+                        <span>Rhett Muse</span><span class="score">0</span>
+                    </div>
+                </div>
+                </div><div class="round-column"><div class="round-title">Round 6</div>
+                <div class="match-box">
+                    <div class="match-id">BOUT 217</div>
                     <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
                     </div>
@@ -95,8 +54,8 @@
                     </div>
                 </div>
                 
-                <div class="match">
-                    <div class="match-header">Bout 218</div>
+                <div class="match-box">
+                    <div class="match-id">BOUT 218</div>
                     <div class="player ">
                         <span>Thomas Donovan</span><span class="score">0</span>
                     </div>
@@ -104,49 +63,49 @@
                         <span>Rosalie Curry</span><span class="score">0</span>
                     </div>
                 </div>
-                
-                <div class="match">
-                    <div class="match-header">Bout 0</div>
-                    <div class="player ">
-                        <span>Bye</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>Rhett Muse</span><span class="score">0</span>
-                    </div>
-                </div>
-                </div><div class="round"><h3>Round 9</h3>
-                <div class="match">
-                    <div class="match-header">Bout 227</div>
+                </div><div class="round-column"><div class="round-title">Round 4</div>
+                <div class="match-box">
+                    <div class="match-id">BOUT 209</div>
                     <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
+                    </div>
+                    <div class="player ">
+                        <span>Thomas Donovan</span><span class="score">0</span>
+                    </div>
+                </div>
+                
+                <div class="match-box">
+                    <div class="match-id">BOUT 210</div>
+                    <div class="player ">
+                        <span>Rhett Muse</span><span class="score">0</span>
                     </div>
                     <div class="player ">
                         <span>Rosalie Curry</span><span class="score">0</span>
                     </div>
                 </div>
+                </div><div class="round-column"><div class="round-title">Round 3</div>
+                <div class="match-box">
+                    <div class="match-id">BOUT 207</div>
+                    <div class="player ">
+                        <span>Rhett Muse</span><span class="score">0</span>
+                    </div>
+                    <div class="player ">
+                        <span>Thomas Donovan</span><span class="score">0</span>
+                    </div>
+                </div>
                 
-                <div class="match">
-                    <div class="match-header">Bout 228</div>
+                <div class="match-box">
+                    <div class="match-id">BOUT 208</div>
+                    <div class="player ">
+                        <span>Rosalie Curry</span><span class="score">0</span>
+                    </div>
                     <div class="player ">
                         <span>Leland Sullivan</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
-                        <span>Rhett Muse</span><span class="score">0</span>
-                    </div>
                 </div>
-                
-                <div class="match">
-                    <div class="match-header">Bout 0</div>
-                    <div class="player ">
-                        <span>Thomas Donovan</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>Bye</span><span class="score">0</span>
-                    </div>
-                </div>
-                </div><div class="round"><h3>Round 11</h3>
-                <div class="match">
-                    <div class="match-header">Bout 232</div>
+                </div><div class="round-column"><div class="round-title">Round 11</div>
+                <div class="match-box">
+                    <div class="match-id">BOUT 232</div>
                     <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
                     </div>
@@ -155,18 +114,8 @@
                     </div>
                 </div>
                 
-                <div class="match">
-                    <div class="match-header">Bout 0</div>
-                    <div class="player ">
-                        <span>Rosalie Curry</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>Bye</span><span class="score">0</span>
-                    </div>
-                </div>
-                
-                <div class="match">
-                    <div class="match-header">Bout 233</div>
+                <div class="match-box">
+                    <div class="match-id">BOUT 233</div>
                     <div class="player ">
                         <span>Leland Sullivan</span><span class="score">0</span>
                     </div>
