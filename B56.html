@@ -7,62 +7,63 @@
             <style>
                 body { 
                     background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; 
-                    margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden;
+                    margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh;
                 }
                 
-                /* Title Bar */
                 .title-bar { 
                     padding: 10px 25px; background: #1e272e; display: flex; 
                     justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d;
                 }
-                .branding { text-align: right; line-height: 1.2; }
-                .matlogic-text { color: #2ecc71; font-weight: bold; font-size: 0.9em; }
-                .timestamp { color: #576574; font-size: 0.75em; }
-                .back-btn { color: #3498db; text-decoration: none; font-weight: bold; font-size: 0.9em; }
 
-                /* Header Row */
                 .bracket-header-row {
                     display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px;
-                    background: #0f1418;
                 }
                 .header-cell {
                     min-width: 220px; text-align: center; color: #f1c40f; 
-                    font-weight: bold; font-size: 1.1em; text-transform: uppercase;
+                    font-weight: bold; font-size: 1.1em;
                 }
 
-                /* Bracket Body */
                 .bracket-body { 
                     display: flex; flex-direction: row; gap: 30px; padding: 0 20px 20px 20px;
-                    flex-grow: 1; overflow-x: auto; align-items: stretch;
+                    flex-grow: 1; align-items: stretch;
                 }
 
-                /* Fixed Round 12 Centering */
+                /* Default Spacing you liked */
                 .round-col { 
                     display: flex; flex-direction: column; 
-                    justify-content: center; /* Forces Bout 1 to the dead center */
-                    gap: 20px; /* Space between bouts in the same round */
+                    justify-content: space-around; 
                     min-width: 220px; height: 100%;
+                }
+
+                /* Specific override for Round 12 to center the anchor bout */
+                .round-12 {
+                    justify-content: center !important;
+                    gap: 40px;
                 }
 
                 .match-card { 
                     background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
-                    padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                    padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4);
                 }
 
-                .bout-num { font-size: 0.7em; color: #f1c40f; margin-bottom: 6px; font-weight: bold; }
-                .player { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.95em; }
+                .bout-num { font-size: 0.7em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
+                .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; }
                 .winner { color: #2ecc71; font-weight: bold; }
                 .bye { color: #576574; font-style: italic; }
                 .score { background: #000; padding: 0 6px; border-radius: 3px; min-width: 18px; text-align: center; }
+                
+                .matlogic-brand { text-align: right; }
+                .matlogic-text { color: #2ecc71; font-weight: bold; font-size: 0.85em; }
+                .sync-time { color: #576574; font-size: 0.7em; }
             </style>
         </head>
         <body>
             <div class="title-bar">
-                <a href="index.html" class="back-btn">← ALL WEIGHTS</a>
-                <h2 style="margin:0; font-size: 1.4em;">B56 lbs</h2>
-                <div class="branding">
-                    <div class="matlogic-text">Auto-updated by MatLogic</div>
-                    <div class="timestamp">Last Sync: 02/17 05:29 PM</div>
+                <a href="index.html" style="color:#3498db; text-decoration:none; font-weight:bold;">← BACK</a>
+                <h2 style="margin:0;">B56 lbs</h2>
+                <div class="matlogic-brand">
+                    <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
+                    <div class="sync-time">LAST SYNC: 05:32 PM</div>
                 </div>
             </div>
 
@@ -71,7 +72,7 @@
             </div>
 
             <div class="bracket-body">
-        <div class="round-col">
+        <div class="round-col ">
                 <div class="match-card">
                     <div class="bout-num">BOUT 157</div>
                     <div class="player  ">
@@ -101,7 +102,7 @@
                         <span>Bye</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-col">
+                </div><div class="round-col ">
                 <div class="match-card">
                     <div class="bout-num">BOUT 144</div>
                     <div class="player  ">
@@ -131,7 +132,7 @@
                         <span>Tshaka Curtis</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-col">
+                </div><div class="round-col ">
                 <div class="match-card">
                     <div class="bout-num">BOUT BYE</div>
                     <div class="player  ">
@@ -161,7 +162,7 @@
                         <span>Cannon Ross</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-col">
+                </div><div class="round-col ">
                 <div class="match-card">
                     <div class="bout-num">BOUT BYE</div>
                     <div class="player  ">
@@ -191,7 +192,7 @@
                         <span>Emerson Swartz</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-col">
+                </div><div class="round-col ">
                 <div class="match-card">
                     <div class="bout-num">BOUT 166</div>
                     <div class="player  ">
