@@ -2,274 +2,341 @@
         <!DOCTYPE html>
         <html>
         <head>
-            <style>
-                body { background: #121212; color: white; font-family: 'Segoe UI', sans-serif; padding: 30px; }
-                .bracket-wrapper { display: flex; flex-direction: row; gap: 20px; align-items: stretch; }
-                .round-column { display: flex; flex-direction: column; justify-content: space-around; min-width: 200px; }
-                .round-title { text-align: center; color: #f1c40f; font-size: 1.2em; margin-bottom: 20px; border-bottom: 2px solid #333; }
-                .match-box { 
-                    background: #1e272e; border: 1px solid #3d4e5d; border-radius: 6px; 
-                    padding: 10px; margin: 15px 0; position: relative; font-size: 0.9em;
+            <meta charset="UTF-8">
+            <meta http-equiv="refresh" content="30"> <style>
+                body { 
+                    background: #121212; color: white; font-family: 'Segoe UI', Tahoma, sans-serif; 
+                    margin: 0; padding: 20px; overflow-x: auto;
                 }
-                .match-id { font-size: 0.75em; color: #888; margin-bottom: 5px; border-bottom: 1px solid #333; }
-                .player { display: flex; justify-content: space-between; padding: 3px 0; }
+                h1 { color: #f1c40f; margin-left: 20px; }
+                
+                /* The Bracket Container */
+                .bracket-container { 
+                    display: flex; 
+                    flex-direction: row; 
+                    gap: 30px; 
+                    min-height: 90vh; /* Ensures enough height for centering */
+                    align-items: stretch;
+                }
+
+                /* Column Logic: space-around creates the vertical centering for smaller rounds */
+                .round-col { 
+                    display: flex; 
+                    flex-direction: column; 
+                    justify-content: space-around; 
+                    min-width: 220px;
+                }
+
+                .round-header { 
+                    text-align: center; font-weight: bold; color: #f1c40f;
+                    padding: 10px 0; border-bottom: 2px solid #333; margin-bottom: 10px;
+                    height: 30px; /* Keep headers level across the top */
+                }
+
+                .match-card { 
+                    background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
+                    padding: 8px; margin: 10px 0; position: relative;
+                }
+
+                .bout-num { font-size: 0.7em; color: #7f8c8d; border-bottom: 1px solid #2c3e50; margin-bottom: 4px; }
+                .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.9em; }
                 .winner { color: #2ecc71; font-weight: bold; }
-                .score { background: #000; padding: 0 5px; border-radius: 3px; min-width: 20px; text-align: center; }
-                .back-link { color: #3498db; text-decoration: none; margin-bottom: 20px; display: inline-block; }
+                .bye { color: #7f8c8d; font-style: italic; }
+                .score { background: #000; padding: 0 4px; border-radius: 2px; min-width: 15px; text-align: center; }
+                .back-btn { color: #3498db; text-decoration: none; padding: 10px; display: inline-block; }
             </style>
-            <title>B40 Bracket</title>
         </head>
         <body>
-            <a href="index.html" class="back-link">← Back to Menu</a>
-            <h1>B40 lbs Bracket</h1>
-            <div class="bracket-wrapper">
-        <div class="round-column"><div class="round-title">Round 12</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 234</div>
-                    <div class="player ">
+            <a href="index.html" class="back-btn">← Main Menu</a>
+            <h1>B40 lbs</h1>
+            <div class="bracket-container">
+        <div class="round-col"><div class="round-header">RD 12</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT 234</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                </div>
-                
-                <div class="match-box">
-                    <div class="match-id">BOUT 235</div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                </div>
-                </div><div class="round-column"><div class="round-title">Round 10</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 229</div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 230</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 235</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                </div>
-                </div><div class="round-column"><div class="round-title">Round 9</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 225</div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
-                
-                <div class="match-box">
-                    <div class="match-id">BOUT 226</div>
-                    <div class="player ">
+                </div><div class="round-col"><div class="round-header">RD 10</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT 229</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                </div>
-                </div><div class="round-column"><div class="round-title">Round 7</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 219</div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 220</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 230</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                </div>
+                </div><div class="round-col"><div class="round-header">RD 9</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT 225</div>
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 221</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 226</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                </div>
+                </div><div class="round-col"><div class="round-header">RD 7</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT 219</div>
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 222</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 220</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                </div>
+                
+                <div class="match-card">
+                    <div class="bout-num">BOUT 221</div>
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                </div>
+                
+                <div class="match-card">
+                    <div class="bout-num">BOUT 222</div>
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
                         <span>Jace McGrew</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-column"><div class="round-title">Round 6</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 215</div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
+                </div><div class="round-col"><div class="round-header">RD 6</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player  ">
+                        <span>Bye</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 216</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 215</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-column"><div class="round-title">Round 2</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 201</div>
-                    <div class="player winner">
+                
+                <div class="match-card">
+                    <div class="bout-num">BOUT 216</div>
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                </div>
+                
+                <div class="match-card">
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player  ">
+                        <span>Jace McGrew</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
+                        <span>Bye</span><span class="score">0</span>
+                    </div>
+                </div>
+                </div><div class="round-col"><div class="round-header">RD 2</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player  ">
+                        <span>Joaquin Medina</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
+                        <span>Bye</span><span class="score">0</span>
+                    </div>
+                </div>
+                
+                <div class="match-card">
+                    <div class="bout-num">BOUT 201</div>
+                    <div class="player winner ">
                         <span>Tyler Loiodice</span><span class="score">4</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>Jace McGrew</span><span class="score">3</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 202</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 202</div>
+                    <div class="player  ">
                         <span>Rebecca Linthicum</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>Mark Miles</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 203</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 203</div>
+                    <div class="player  ">
                         <span>Jace Younker</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>Axton Plume</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 204</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 204</div>
+                    <div class="player  ">
                         <span>Decker Parrish</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>Mannix Miller</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 205</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 205</div>
+                    <div class="player  ">
                         <span>Lincoln Demers</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>Striker Chucoski</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 206</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 206</div>
+                    <div class="player  ">
                         <span>Owen Douty</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>Nico Falzone</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-column"><div class="round-title">Round 5</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 211</div>
-                    <div class="player ">
+                
+                <div class="match-card">
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player  ">
+                        <span>Bye</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
+                        <span>Jack Kelly</span><span class="score">0</span>
+                    </div>
+                </div>
+                </div><div class="round-col"><div class="round-header">RD 5</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT 211</div>
+                    <div class="player  ">
                         <span>Joaquin Medina</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>Tyler Loiodice</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 212</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 212</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                </div>
-                
-                <div class="match-box">
-                    <div class="match-id">BOUT 213</div>
-                    <div class="player ">
-                        <span>TBD</span><span class="score">0</span>
-                    </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 214</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 213</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                </div>
+                
+                <div class="match-card">
+                    <div class="bout-num">BOUT 214</div>
+                    <div class="player  ">
+                        <span>TBD</span><span class="score">0</span>
+                    </div>
+                    <div class="player  ">
                         <span>Jack Kelly</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-column"><div class="round-title">Round 8</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 223</div>
-                    <div class="player ">
+                </div><div class="round-col"><div class="round-header">RD 8</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT 223</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
                 
-                <div class="match-box">
-                    <div class="match-id">BOUT 224</div>
-                    <div class="player ">
+                <div class="match-card">
+                    <div class="bout-num">BOUT 224</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
-                </div><div class="round-column"><div class="round-title">Round 11</div>
-                <div class="match-box">
-                    <div class="match-id">BOUT 231</div>
-                    <div class="player ">
+                </div><div class="round-col"><div class="round-header">RD 11</div>
+                <div class="match-card">
+                    <div class="bout-num">BOUT 231</div>
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
-                    <div class="player ">
+                    <div class="player  ">
                         <span>TBD</span><span class="score">0</span>
                     </div>
                 </div>
