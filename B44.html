@@ -7,34 +7,13 @@
                 <style>
                     body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
                     .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; flex-shrink: 0; }
-                    .bracket-header-row { display: flex; flex-direction: row; gap: 60px; padding: 15px 20px 5px 20px; flex-shrink: 0; }
+                    .bracket-header-row { display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px; flex-shrink: 0; }
                     .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
-                    
-                    .bracket-body { display: flex; flex-direction: row; gap: 60px; padding: 0 20px 20px 20px; flex-grow: 1; align-items: stretch; overflow-x: auto; overflow-y: hidden; }
-                    .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; height: 100%; position: relative; }
-                    .round-12 { justify-content: center !important; gap: 80px; }
-
-                    .match-card { 
-                        background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
-                        padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative; 
-                        z-index: 2;
-                    }
-                    
-                    /* Connector Hook Logic (Only for standard brackets) */
-                    
-                    .match-card::after {
-                        content: ""; position: absolute; right: -31px; top: 50%;
-                        width: 30px; height: 2px; background: #3d4e5d;
-                    }
-                    .match-card:nth-child(odd)::before {
-                        content: ""; position: absolute; right: -31px; top: 50%;
-                        width: 2px; height: 100%; background: #3d4e5d;
-                    }
-                    
-
-                    .no-line::after, .no-line::before { display: none !important; }
-
-                    .match-title { position: absolute; top: -20px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
+                    .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 0 20px 20px 20px; flex-grow: 1; align-items: stretch; overflow-x: auto; overflow-y: hidden; }
+                    .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; height: 100%; }
+                    .round-12 { justify-content: center !important; gap: 60px; }
+                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative; }
+                    .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
                     .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
                     .source-tag { font-size: 0.8em; color: #e74c3c; font-weight: bold; margin-right: 5px; }
                     .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; }
@@ -49,7 +28,7 @@
                     <h2 style="margin:0;">B44 lbs</h2>
                     <div style="text-align:right;">
                         <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
-                        <div style="color:#576574; font-size:0.7em;">LAST SYNC: 11:54 PM</div>
+                        <div style="color:#576574; font-size:0.7em;">LAST SYNC: 11:55 PM</div>
                     </div>
                 </div>
                 <div class="bracket-header-row">
@@ -57,7 +36,7 @@
                 </div>
                 <div class="bracket-body">
             <div class="round-col round-12">
-                    <div class="match-card no-line">
+                    <div class="match-card">
                         <div class="match-title">3rd Place Match</div>
                         <div class="bout-num">BOUT 170</div>
                         <div class="player ">
@@ -68,7 +47,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card no-line">
+                    <div class="match-card">
                         <div class="match-title">5th Place Match</div>
                         <div class="bout-num">BOUT 171</div>
                         <div class="player ">
@@ -79,7 +58,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 162</div>
                         <div class="player ">
@@ -90,7 +69,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 163</div>
                         <div class="player ">
@@ -101,7 +80,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 155</div>
                         <div class="player ">
@@ -112,7 +91,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 156</div>
                         <div class="player ">
@@ -123,7 +102,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 146</div>
                         <div class="player ">
@@ -134,7 +113,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 147</div>
                         <div class="player ">
@@ -145,7 +124,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 148</div>
                         <div class="player ">
@@ -156,7 +135,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 149</div>
                         <div class="player ">
@@ -167,7 +146,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 140</div>
                         <div class="player ">
@@ -178,7 +157,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 141</div>
                         <div class="player ">
@@ -189,7 +168,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 142</div>
                         <div class="player ">
@@ -200,7 +179,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 143</div>
                         <div class="player ">
@@ -211,7 +190,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 124</div>
                         <div class="player ">
@@ -222,7 +201,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 125</div>
                         <div class="player ">
@@ -233,7 +212,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 126</div>
                         <div class="player ">
@@ -244,7 +223,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 127</div>
                         <div class="player ">
@@ -255,7 +234,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 128</div>
                         <div class="player ">
@@ -266,7 +245,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 129</div>
                         <div class="player ">
@@ -277,7 +256,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 130</div>
                         <div class="player ">
@@ -288,7 +267,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 131</div>
                         <div class="player ">
@@ -299,7 +278,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -310,7 +289,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 120</div>
                         <div class="player ">
@@ -321,7 +300,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -332,7 +311,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -343,7 +322,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -354,7 +333,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 121</div>
                         <div class="player ">
@@ -365,7 +344,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 122</div>
                         <div class="player ">
@@ -376,7 +355,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -387,7 +366,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -398,7 +377,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 101</div>
                         <div class="player ">
@@ -409,7 +388,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 103</div>
                         <div class="player ">
@@ -420,7 +399,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 102</div>
                         <div class="player ">
@@ -431,7 +410,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -442,7 +421,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 104</div>
                         <div class="player ">
@@ -453,7 +432,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 105</div>
                         <div class="player ">
@@ -464,7 +443,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -475,7 +454,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -486,7 +465,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 106</div>
                         <div class="player ">
@@ -497,7 +476,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 107</div>
                         <div class="player ">
@@ -508,7 +487,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 108</div>
                         <div class="player ">
@@ -519,7 +498,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 109</div>
                         <div class="player ">
@@ -530,7 +509,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 110</div>
                         <div class="player ">
@@ -541,7 +520,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 111</div>
                         <div class="player ">
@@ -552,7 +531,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         <div class="player ">
@@ -563,7 +542,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 112</div>
                         <div class="player ">
@@ -574,7 +553,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 113</div>
                         <div class="player ">
@@ -585,7 +564,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 114</div>
                         <div class="player ">
@@ -596,7 +575,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 115</div>
                         <div class="player ">
@@ -607,7 +586,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 116</div>
                         <div class="player ">
@@ -618,7 +597,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 117</div>
                         <div class="player ">
@@ -629,7 +608,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 118</div>
                         <div class="player ">
@@ -640,7 +619,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 119</div>
                         <div class="player ">
@@ -651,7 +630,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 136</div>
                         <div class="player ">
@@ -662,7 +641,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 137</div>
                         <div class="player ">
@@ -673,7 +652,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 138</div>
                         <div class="player ">
@@ -684,7 +663,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 139</div>
                         <div class="player ">
@@ -695,7 +674,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 152</div>
                         <div class="player ">
@@ -706,7 +685,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 153</div>
                         <div class="player ">
@@ -717,7 +696,7 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card no-line">
+                    <div class="match-card">
                         <div class="match-title">1st Place Match</div>
                         <div class="bout-num">BOUT 165</div>
                         <div class="player ">
