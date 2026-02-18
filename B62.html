@@ -5,31 +5,41 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="refresh" content="30">
                 <style>
-                    /* Changed overflow-x to auto so the whole page scrolls together */
                     body { 
                         background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; 
-                        margin: 0; padding: 0; display: block; min-height: 100vh; 
+                        margin: 0; padding: 0; display: block;
                         overflow-x: auto; overflow-y: auto; 
                     }
                     
-                    /* Ensures the title bar and bracket take up the same total width */
-                    .page-wrapper { display: inline-block; min-width: 100%; }
+                    .page-wrapper { display: inline-block; min-width: 100%; vertical-align: top; }
 
                     .title-bar { 
                         padding: 10px 25px; background: #1e272e; display: flex; 
                         justify-content: space-between; align-items: center; 
-                        border-bottom: 1px solid #3d4e5d; position: sticky; left: 0;
+                        border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 10;
                     }
                     
-                    .bracket-header-row { display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px; }
-                    .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
+                    .bracket-header-row { display: flex; flex-direction: row; gap: 40px; padding: 20px 20px 10px 20px; }
+                    .header-cell { width: 220px; min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
                     
-                    .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 0 20px 20px 20px; align-items: stretch; }
+                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 0 20px 40px 20px; }
                     
-                    .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; height: 85vh; }
-                    .round-12 { justify-content: center !important; gap: 60px; }
+                    /* Fixed Column Spacing */
+                    .round-col { 
+                        display: flex; flex-direction: column; width: 220px; min-width: 220px;
+                        gap: 40px; /* Constant vertical spacing between bouts */
+                        padding-top: 20px;
+                    }
+
+                    /* Special Round Adjustments for Round 12/Finals to keep them centered */
+                    .round-12, .round-11 { justify-content: center; }
                     
-                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative; }
+                    .match-card { 
+                        background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
+                        padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative;
+                        height: 75px; /* Fixed height for consistency */
+                    }
+                    
                     .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
                     .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
                     .pin-label { color: #e74c3c; font-size: 0.7em; font-weight: bold; text-align: right; margin-bottom: -2px; text-transform: uppercase; }
@@ -47,14 +57,14 @@
                         <h2 style="margin:0;">B62 lbs</h2>
                         <div style="text-align:right;">
                             <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
-                            <div style="color:#576574; font-size:0.7em;">LAST SYNC: 12:38 AM</div>
+                            <div style="color:#576574; font-size:0.7em;">LAST SYNC: 12:42 AM</div>
                         </div>
                     </div>
                     <div class="bracket-header-row">
                         <div class="header-cell">RD 9</div><div class="header-cell">RD 6</div><div class="header-cell">RD 11</div>
                     </div>
                     <div class="bracket-body">
-            <div class="round-col ">
+            <div class="round-col round-9">
                     <div class="match-card">
                         
                         <div class="bout-num">BOUT 159</div>
@@ -66,7 +76,7 @@
                             <span>TITUS SUTTON</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col ">
+                    </div><div class="round-col round-6">
                     <div class="match-card">
                         
                         <div class="bout-num">BOUT 145</div>
@@ -78,7 +88,7 @@
                             <span>TITUS SUTTON</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col ">
+                    </div><div class="round-col round-11">
                     <div class="match-card">
                         <div class="match-title">1st Place Match</div>
                         <div class="bout-num">BOUT 167</div>
