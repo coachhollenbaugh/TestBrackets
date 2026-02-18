@@ -5,40 +5,30 @@
             <meta charset="UTF-8">
             <meta http-equiv="refresh" content="30">
             <style>
-                body { 
-                    background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; 
-                    margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh;
-                }
-                .title-bar { 
-                    padding: 10px 25px; background: #1e272e; display: flex; 
-                    justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d;
-                }
+                body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+                .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; }
                 .bracket-header-row { display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px; }
                 .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
-                .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 0 20px 20px 20px; flex-grow: 1; align-items: stretch; }
-                
+                .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 0 20px 20px 20px; flex-grow: 1; align-items: stretch; overflow-x: auto; }
                 .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; height: 100%; }
                 .round-12 { justify-content: center !important; gap: 40px; }
-
-                .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
-                .bout-num { font-size: 0.7em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
+                .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative; }
+                .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.7em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
+                .bout-num { font-size: 0.7em; color: #7f8c8d; margin-bottom: 4px; }
+                .source-tag { font-size: 0.8em; color: #e74c3c; font-weight: bold; margin-right: 5px; }
                 .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; }
                 .winner { color: #2ecc71; font-weight: bold; }
-                .bye { color: #576574; font-style: italic; }
                 .score { background: #000; padding: 0 6px; border-radius: 3px; min-width: 18px; text-align: center; }
-                
-                .matlogic-brand { text-align: right; }
                 .matlogic-text { color: #2ecc71; font-weight: bold; font-size: 0.85em; }
-                .sync-time { color: #576574; font-size: 0.7em; }
             </style>
         </head>
         <body>
             <div class="title-bar">
                 <a href="index.html" style="color:#3498db; text-decoration:none; font-weight:bold;">← BACK</a>
                 <h2 style="margin:0;">B48 lbs</h2>
-                <div class="matlogic-brand">
+                <div style="text-align:right;">
                     <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
-                    <div class="sync-time">LAST SYNC: 11:05 PM</div>
+                    <div style="color:#576574; font-size:0.7em;">LAST SYNC: 11:15 PM</div>
                 </div>
             </div>
             <div class="bracket-header-row">
@@ -47,151 +37,166 @@
             <div class="bracket-body">
         <div class="round-col ">
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 227</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rosalie Curry</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 228</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Leland Sullivan</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rhett Muse</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
-                    <div class="bout-num">BOUT BYE</div>
-                    <div class="player  ">
+                    
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player ">
                         <span>Thomas Donovan</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Bye</span><span class="score">0</span>
                     </div>
                 </div>
                 </div><div class="round-col ">
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 217</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Leland Sullivan</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 218</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Thomas Donovan</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rosalie Curry</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
-                    <div class="bout-num">BOUT BYE</div>
-                    <div class="player  ">
+                    
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player ">
                         <span>Bye</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rhett Muse</span><span class="score">0</span>
                     </div>
                 </div>
                 </div><div class="round-col ">
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 209</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Thomas Donovan</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
-                    <div class="bout-num">BOUT BYE</div>
-                    <div class="player  ">
+                    
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player ">
                         <span>Bye</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Leland Sullivan</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 210</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rhett Muse</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rosalie Curry</span><span class="score">0</span>
                     </div>
                 </div>
                 </div><div class="round-col ">
                 <div class="match-card">
-                    <div class="bout-num">BOUT BYE</div>
-                    <div class="player  ">
+                    
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Bye</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 207</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rhett Muse</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Thomas Donovan</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 208</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rosalie Curry</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Leland Sullivan</span><span class="score">0</span>
                     </div>
                 </div>
                 </div><div class="round-col ">
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 232</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Geovanni Alvarez</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Rhett Muse</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
-                    <div class="bout-num">BOUT BYE</div>
-                    <div class="player  ">
+                    
+                    <div class="bout-num">BOUT ---</div>
+                    <div class="player ">
                         <span>Rosalie Curry</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Bye</span><span class="score">0</span>
                     </div>
                 </div>
                 
                 <div class="match-card">
+                    
                     <div class="bout-num">BOUT 233</div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Leland Sullivan</span><span class="score">0</span>
                     </div>
-                    <div class="player  ">
+                    <div class="player ">
                         <span>Thomas Donovan</span><span class="score">0</span>
                     </div>
                 </div>
