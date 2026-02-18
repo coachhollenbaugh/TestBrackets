@@ -5,19 +5,59 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="refresh" content="30">
                 <style>
-                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; overflow-x: auto; overflow-y: auto; }
+                    body { 
+                        background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; 
+                        margin: 0; padding: 0; overflow-x: auto; overflow-y: auto;
+                    }
+                    
                     .outer-container { display: inline-block; min-width: 100%; vertical-align: top; }
-                    .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 100; }
+
+                    .title-bar { 
+                        padding: 10px 25px; background: #1e272e; display: flex; 
+                        justify-content: space-between; align-items: center; 
+                        border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 100;
+                    }
+                    
                     .bracket-header-row { display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px; }
                     .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
-                    .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 20px; min-height: 100vh; height: max-content; }
-                    .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; padding: 10px 0; }
                     
-                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative; width: 200px; margin: 10px 0; }
+                    .bracket-body { 
+                        display: flex; flex-direction: row; gap: 30px; padding: 20px; 
+                        min-height: 100vh; height: max-content;
+                    }
                     
-                    /* Custom Offset Classes */
-                    .shift-down { transform: translateY(45px); }
-                    .shift-up { transform: translateY(-45px); }
+                    .round-col { 
+                        display: flex; flex-direction: column; justify-content: space-around; 
+                        min-width: 220px; padding: 10px 0;
+                    }
+
+                    .round-12 { justify-content: center !important; gap: 80px; }
+                    
+                    .match-card { 
+                        background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
+                        padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative; 
+                        width: 200px; margin: 20px 0;
+                    }
+
+                    /* Connector Lines */
+                    .match-card::before, .match-card::after {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        width: 15px; /* Half of the 30px gap */
+                        height: 2px;
+                        background: #3d4e5d;
+                    }
+                    
+                    /* Left Connector */
+                    .match-card::before { left: -16px; }
+                    
+                    /* Right Connector */
+                    .match-card::after { right: -16px; }
+
+                    /* Remove connectors for very first and very last rounds if desired */
+                    /* .round-col:first-child .match-card::before { display: none; } */
+                    /* .round-col:last-child .match-card::after { display: none; } */
                     
                     .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
                     .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
@@ -36,15 +76,15 @@
                         <h2 style="margin:0;">B52 lbs</h2>
                         <div style="text-align:right;">
                             <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
-                            <div style="color:#576574; font-size:0.7em;">LAST SYNC: 07:45 AM</div>
+                            <div style="color:#576574; font-size:0.7em;">LAST SYNC: 07:50 AM</div>
                         </div>
                     </div>
                     <div class="bracket-header-row">
                         <div class="header-cell">RD 12</div><div class="header-cell">RD 10</div><div class="header-cell">RD 9</div><div class="header-cell">RD 5</div><div class="header-cell">RD 8</div><div class="header-cell">RD 11</div>
                     </div>
                     <div class="bracket-body">
-            <div class="round-col">
-                    <div class="match-card ">
+            <div class="round-col round-12">
+                    <div class="match-card">
                         <div class="match-title">3rd Place Match</div>
                         <div class="bout-num">BOUT 168</div>
                         
@@ -56,7 +96,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         <div class="match-title">5th Place Match</div>
                         <div class="bout-num">BOUT 169</div>
                         
@@ -67,8 +107,8 @@
                             <span><span class="source-tag">L-161</span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col">
-                    <div class="match-card shift-up">
+                    </div><div class="round-col ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 160</div>
                         
@@ -80,7 +120,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card shift-down">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 161</div>
                         
@@ -91,8 +131,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col">
-                    <div class="match-card ">
+                    </div><div class="round-col ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -104,7 +144,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 154</div>
                         
@@ -115,8 +155,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col">
-                    <div class="match-card ">
+                    </div><div class="round-col ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -128,7 +168,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 133</div>
                         
@@ -140,7 +180,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 134</div>
                         
@@ -152,7 +192,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 135</div>
                         
@@ -163,8 +203,8 @@
                             <span>Cadence Smithson</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col">
-                    <div class="match-card ">
+                    </div><div class="round-col ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 150</div>
                         
@@ -176,7 +216,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card">
                         
                         <div class="bout-num">BOUT 151</div>
                         
@@ -187,8 +227,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col">
-                    <div class="match-card ">
+                    </div><div class="round-col ">
+                    <div class="match-card">
                         <div class="match-title">1st Place Match</div>
                         <div class="bout-num">BOUT 164</div>
                         
