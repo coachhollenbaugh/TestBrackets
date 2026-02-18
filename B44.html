@@ -5,40 +5,40 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="refresh" content="30">
                 <style>
-                    body { 
-                        background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; 
-                        margin: 0; padding: 0; display: block;
-                        overflow-x: auto; overflow-y: auto; 
-                    }
-                    
-                    .page-wrapper { display: inline-block; min-width: 100%; vertical-align: top; }
-
+                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+                    .page-wrapper { display: inline-block; min-width: 100%; }
                     .title-bar { 
                         padding: 10px 25px; background: #1e272e; display: flex; 
                         justify-content: space-between; align-items: center; 
-                        border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 10;
+                        border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 20;
                     }
-                    
-                    .bracket-header-row { display: flex; flex-direction: row; gap: 40px; padding: 20px 20px 10px 20px; }
+                    .bracket-header-row { display: flex; flex-direction: row; gap: 40px; padding: 20px 20px 0 20px; }
                     .header-cell { width: 220px; min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
                     
-                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 0 20px 40px 20px; }
+                    /* Grid Layout: 32 mini-rows to allow perfect mid-point centering */
+                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 20px; }
                     
-                    /* Fixed Column Spacing */
                     .round-col { 
-                        display: flex; flex-direction: column; width: 220px; min-width: 220px;
-                        gap: 40px; /* Constant vertical spacing between bouts */
-                        padding-top: 20px;
+                        display: grid; 
+                        grid-template-rows: repeat(32, 30px); /* 32 fixed slots */
+                        width: 220px; min-width: 220px;
                     }
 
-                    /* Special Round Adjustments for Round 12/Finals to keep them centered */
-                    .round-12, .round-11 { justify-content: center; }
-                    
                     .match-card { 
                         background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
                         padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative;
-                        height: 75px; /* Fixed height for consistency */
+                        align-self: center; /* This is the magic for mid-point spacing */
                     }
+                    
+                    /* Placement Logic based on match count in the round */
+                    .size-1 { grid-row: span 32; }
+                    .size-2-1 { grid-row: span 16; }
+                    .size-2-2 { grid-row: span 16; }
+                    .size-4-1 { grid-row: span 8; }
+                    .size-4-2 { grid-row: span 8; }
+                    .size-4-3 { grid-row: span 8; }
+                    .size-4-4 { grid-row: span 8; }
+                    .size-8-1 { grid-row: span 4; }
                     
                     .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
                     .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
@@ -47,7 +47,6 @@
                     .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; align-items: center; }
                     .winner { color: #2ecc71; font-weight: bold; }
                     .score { background: #000; padding: 0 6px; border-radius: 3px; min-width: 18px; text-align: center; }
-                    .matlogic-text { color: #2ecc71; font-weight: bold; font-size: 0.85em; }
                 </style>
             </head>
             <body>
@@ -56,16 +55,16 @@
                         <a href="index.html" style="color:#3498db; text-decoration:none; font-weight:bold;">← BACK</a>
                         <h2 style="margin:0;">B44 lbs</h2>
                         <div style="text-align:right;">
-                            <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
-                            <div style="color:#576574; font-size:0.7em;">LAST SYNC: 12:42 AM</div>
+                            <div style="color:#2ecc71; font-weight:bold; font-size:0.85em;">AUTO-UPDATED BY MATLOGIC</div>
+                            <div style="color:#576574; font-size:0.7em;">LAST SYNC: 12:44 AM</div>
                         </div>
                     </div>
                     <div class="bracket-header-row">
                         <div class="header-cell">RD 12</div><div class="header-cell">RD 10</div><div class="header-cell">RD 9</div><div class="header-cell">RD 7</div><div class="header-cell">RD 6</div><div class="header-cell">RD 4</div><div class="header-cell">RD 3</div><div class="header-cell">RD 1</div><div class="header-cell">RD 2</div><div class="header-cell">RD 5</div><div class="header-cell">RD 8</div><div class="header-cell">RD 11</div>
                     </div>
                     <div class="bracket-body">
-            <div class="round-col round-12">
-                    <div class="match-card">
+            <div class="round-col">
+                    <div class="match-card size-2-1">
                         <div class="match-title">3rd Place Match</div>
                         <div class="bout-num">BOUT 170</div>
                         
@@ -77,7 +76,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-2-2">
                         <div class="match-title">5th Place Match</div>
                         <div class="bout-num">BOUT 171</div>
                         
@@ -88,8 +87,8 @@
                             <span><span class="source-tag">L-163</span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-10">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-2-1">
                         
                         <div class="bout-num">BOUT 162</div>
                         
@@ -101,7 +100,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-2-2">
                         
                         <div class="bout-num">BOUT 163</div>
                         
@@ -112,8 +111,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-9">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-2-1">
                         
                         <div class="bout-num">BOUT 155</div>
                         
@@ -125,7 +124,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-2-2">
                         
                         <div class="bout-num">BOUT 156</div>
                         
@@ -136,8 +135,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-7">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-4-1">
                         
                         <div class="bout-num">BOUT 146</div>
                         
@@ -149,7 +148,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-2">
                         
                         <div class="bout-num">BOUT 147</div>
                         
@@ -161,7 +160,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-3">
                         
                         <div class="bout-num">BOUT 148</div>
                         
@@ -173,7 +172,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-4">
                         
                         <div class="bout-num">BOUT 149</div>
                         
@@ -184,8 +183,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-6">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-4-1">
                         
                         <div class="bout-num">BOUT 140</div>
                         
@@ -197,7 +196,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-2">
                         
                         <div class="bout-num">BOUT 141</div>
                         
@@ -209,7 +208,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-3">
                         
                         <div class="bout-num">BOUT 142</div>
                         
@@ -221,7 +220,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-4">
                         
                         <div class="bout-num">BOUT 143</div>
                         
@@ -232,8 +231,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-4">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-8-1">
                         
                         <div class="bout-num">BOUT 124</div>
                         
@@ -245,7 +244,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-2">
                         
                         <div class="bout-num">BOUT 125</div>
                         
@@ -257,7 +256,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-3">
                         
                         <div class="bout-num">BOUT 126</div>
                         
@@ -269,7 +268,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-4">
                         
                         <div class="bout-num">BOUT 127</div>
                         
@@ -281,7 +280,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-5">
                         
                         <div class="bout-num">BOUT 128</div>
                         
@@ -293,7 +292,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-6">
                         
                         <div class="bout-num">BOUT 129</div>
                         
@@ -305,7 +304,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-7">
                         
                         <div class="bout-num">BOUT 130</div>
                         
@@ -317,7 +316,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-8">
                         
                         <div class="bout-num">BOUT 131</div>
                         
@@ -328,8 +327,8 @@
                             <span><span class="source-tag">L-112</span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-3">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-8-1">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -341,7 +340,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-2">
                         
                         <div class="bout-num">BOUT 120</div>
                         
@@ -353,7 +352,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-3">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -365,7 +364,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-4">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -377,7 +376,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-5">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -389,7 +388,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-6">
                         
                         <div class="bout-num">BOUT 121</div>
                         
@@ -401,7 +400,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-7">
                         
                         <div class="bout-num">BOUT 122</div>
                         
@@ -413,7 +412,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-8">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -424,8 +423,8 @@
                             <span>Bye</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-1">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -437,7 +436,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 101</div>
                         
@@ -449,7 +448,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 103</div>
                         
@@ -461,7 +460,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 102</div>
                         
@@ -473,7 +472,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -485,7 +484,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 104</div>
                         
@@ -497,7 +496,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 105</div>
                         
@@ -509,7 +508,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -521,7 +520,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -533,7 +532,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 106</div>
                         
@@ -545,7 +544,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 107</div>
                         
@@ -557,7 +556,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 108</div>
                         
@@ -569,7 +568,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 109</div>
                         
@@ -581,7 +580,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 110</div>
                         
@@ -593,7 +592,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 111</div>
                         
@@ -605,7 +604,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 0</div>
                         
@@ -616,8 +615,8 @@
                             <span>Bye</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-2">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-8-1">
                         
                         <div class="bout-num">BOUT 112</div>
                         
@@ -629,7 +628,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-2">
                         
                         <div class="bout-num">BOUT 113</div>
                         
@@ -641,7 +640,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-3">
                         
                         <div class="bout-num">BOUT 114</div>
                         
@@ -653,7 +652,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-4">
                         
                         <div class="bout-num">BOUT 115</div>
                         
@@ -665,7 +664,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-5">
                         
                         <div class="bout-num">BOUT 116</div>
                         
@@ -677,7 +676,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-6">
                         
                         <div class="bout-num">BOUT 117</div>
                         
@@ -689,7 +688,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-7">
                         
                         <div class="bout-num">BOUT 118</div>
                         
@@ -701,7 +700,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-8-8">
                         
                         <div class="bout-num">BOUT 119</div>
                         
@@ -712,8 +711,8 @@
                             <span>Nico Falzone</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-5">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-4-1">
                         
                         <div class="bout-num">BOUT 136</div>
                         
@@ -725,7 +724,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-2">
                         
                         <div class="bout-num">BOUT 137</div>
                         
@@ -737,7 +736,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-3">
                         
                         <div class="bout-num">BOUT 138</div>
                         
@@ -749,7 +748,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-4-4">
                         
                         <div class="bout-num">BOUT 139</div>
                         
@@ -760,8 +759,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-8">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-2-1">
                         
                         <div class="bout-num">BOUT 152</div>
                         
@@ -773,7 +772,7 @@
                         </div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card size-2-2">
                         
                         <div class="bout-num">BOUT 153</div>
                         
@@ -784,8 +783,8 @@
                             <span>TBD</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-11">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-1">
                         <div class="match-title">1st Place Match</div>
                         <div class="bout-num">BOUT 165</div>
                         

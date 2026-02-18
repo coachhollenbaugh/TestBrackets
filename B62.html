@@ -5,40 +5,40 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="refresh" content="30">
                 <style>
-                    body { 
-                        background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; 
-                        margin: 0; padding: 0; display: block;
-                        overflow-x: auto; overflow-y: auto; 
-                    }
-                    
-                    .page-wrapper { display: inline-block; min-width: 100%; vertical-align: top; }
-
+                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+                    .page-wrapper { display: inline-block; min-width: 100%; }
                     .title-bar { 
                         padding: 10px 25px; background: #1e272e; display: flex; 
                         justify-content: space-between; align-items: center; 
-                        border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 10;
+                        border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 20;
                     }
-                    
-                    .bracket-header-row { display: flex; flex-direction: row; gap: 40px; padding: 20px 20px 10px 20px; }
+                    .bracket-header-row { display: flex; flex-direction: row; gap: 40px; padding: 20px 20px 0 20px; }
                     .header-cell { width: 220px; min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
                     
-                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 0 20px 40px 20px; }
+                    /* Grid Layout: 32 mini-rows to allow perfect mid-point centering */
+                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 20px; }
                     
-                    /* Fixed Column Spacing */
                     .round-col { 
-                        display: flex; flex-direction: column; width: 220px; min-width: 220px;
-                        gap: 40px; /* Constant vertical spacing between bouts */
-                        padding-top: 20px;
+                        display: grid; 
+                        grid-template-rows: repeat(32, 30px); /* 32 fixed slots */
+                        width: 220px; min-width: 220px;
                     }
 
-                    /* Special Round Adjustments for Round 12/Finals to keep them centered */
-                    .round-12, .round-11 { justify-content: center; }
-                    
                     .match-card { 
                         background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
                         padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative;
-                        height: 75px; /* Fixed height for consistency */
+                        align-self: center; /* This is the magic for mid-point spacing */
                     }
+                    
+                    /* Placement Logic based on match count in the round */
+                    .size-1 { grid-row: span 32; }
+                    .size-2-1 { grid-row: span 16; }
+                    .size-2-2 { grid-row: span 16; }
+                    .size-4-1 { grid-row: span 8; }
+                    .size-4-2 { grid-row: span 8; }
+                    .size-4-3 { grid-row: span 8; }
+                    .size-4-4 { grid-row: span 8; }
+                    .size-8-1 { grid-row: span 4; }
                     
                     .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
                     .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
@@ -47,7 +47,6 @@
                     .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; align-items: center; }
                     .winner { color: #2ecc71; font-weight: bold; }
                     .score { background: #000; padding: 0 6px; border-radius: 3px; min-width: 18px; text-align: center; }
-                    .matlogic-text { color: #2ecc71; font-weight: bold; font-size: 0.85em; }
                 </style>
             </head>
             <body>
@@ -56,16 +55,16 @@
                         <a href="index.html" style="color:#3498db; text-decoration:none; font-weight:bold;">← BACK</a>
                         <h2 style="margin:0;">B62 lbs</h2>
                         <div style="text-align:right;">
-                            <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
-                            <div style="color:#576574; font-size:0.7em;">LAST SYNC: 12:42 AM</div>
+                            <div style="color:#2ecc71; font-weight:bold; font-size:0.85em;">AUTO-UPDATED BY MATLOGIC</div>
+                            <div style="color:#576574; font-size:0.7em;">LAST SYNC: 12:44 AM</div>
                         </div>
                     </div>
                     <div class="bracket-header-row">
                         <div class="header-cell">RD 9</div><div class="header-cell">RD 6</div><div class="header-cell">RD 11</div>
                     </div>
                     <div class="bracket-body">
-            <div class="round-col round-9">
-                    <div class="match-card">
+            <div class="round-col">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 159</div>
                         
@@ -76,8 +75,8 @@
                             <span>TITUS SUTTON</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-6">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-1">
                         
                         <div class="bout-num">BOUT 145</div>
                         
@@ -88,8 +87,8 @@
                             <span>TITUS SUTTON</span><span class="score">0</span>
                         </div>
                     </div>
-                    </div><div class="round-col round-11">
-                    <div class="match-card">
+                    </div><div class="round-col">
+                    <div class="match-card size-1">
                         <div class="match-title">1st Place Match</div>
                         <div class="bout-num">BOUT 167</div>
                         
