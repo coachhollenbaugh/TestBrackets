@@ -2,474 +2,542 @@
             <!DOCTYPE html>
             <html>
             <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="refresh" content="30">
                 <style>
-                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; overflow-x: auto; }
                     .outer-container { display: inline-block; min-width: 100%; }
-                    .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; }
-                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 40px; min-height: 800px; }
+                    .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 100; }
+                    .bracket-header-row { display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px; }
+                    .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
                     
+                    .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 20px; min-height: 100vh; height: max-content; }
+                    
+                    /* The columns use space-around to create the vertical gaps */
                     .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; position: relative; }
-                    .round-12 { justify-content: center !important; gap: 150px; }
+                    .round-12 { justify-content: center !important; gap: 100px; }
                     
-                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; position: relative; width: 200px; margin: 20px 0; z-index: 5; }
+                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; position: relative; width: 200px; margin: 30px 0; z-index: 5; }
 
-                    /* Hide all lines if Round Robin is detected */
-                    .rr-event .match-card::before, .rr-event .match-card::after, .rr-event .v-line { display: none !important; }
+                    /* Horizontal stubs (15px) */
+                    .match-card::before, .match-card::after { content: ""; position: absolute; top: 50%; width: 15px; height: 2px; background: #3d4e5d; }
+                    .match-card::before { left: -16px; }
+                    .match-card::after { right: -16px; }
 
-                    /* Horizontal Stubs */
-                    .match-card::before, .match-card::after { content: ""; position: absolute; top: 50%; width: 20px; height: 2px; background: #3d4e5d; }
-                    .match-card::before { left: -21px; }
-                    .match-card::after { right: -21px; }
-
-                    /* Vertical Connectors */
+                    /* Vertical connectors at the end of the stubs */
                     .v-line { position: absolute; width: 2px; background: #3d4e5d; z-index: 1; }
-                    .v-left { left: -21px; }
-                    .v-right { right: -21px; }
+                    .v-left { left: -16px; }
+                    .v-right { right: -16px; }
 
-                    /* Logic to meet at midpoint: using a huge height and container clipping */
-                    /* Even (0,2,4) go down, Odd (1,3,5) go up */
-                    .v-down { top: 50%; height: 1000px; max-height: 55%; }
-                    .v-up { bottom: 50%; height: 1000px; max-height: 55%; }
+                    /* Midpoint Logic: The line grows until it hits the center of the gap */
+                    /* We use a large height and overflow:hidden is NOT used, but we'll cap them per round */
+                    .v-down { top: 50%; height: calc(50% + 20px); }
+                    .v-up { bottom: 50%; height: calc(50% + 20px); }
 
-                    /* Cleanup for Round 12 match 2 */
+                    /* Round Robin & Finals Cleanup */
                     .no-lines::before, .no-lines::after, .no-lines .v-line { display: none !important; }
-
-                    .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.9em; }
-                    .score { background: #000; padding: 0 5px; border-radius: 3px; min-width: 20px; text-align: center; }
+                    
+                    .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
+                    .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
+                    .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; align-items: center; }
                     .winner { color: #2ecc71; font-weight: bold; }
+                    .score { background: #000; padding: 0 6px; border-radius: 3px; min-width: 18px; text-align: center; }
                 </style>
             </head>
-            <body class="rr-event">
+            <body>
                 <div class="outer-container">
                     <div class="title-bar">
+                        <a href="index.html" style="color:#3498db; text-decoration:none; font-weight:bold;">← BACK</a>
                         <h2 style="margin:0;">B44 lbs</h2>
-                        <div style="font-size:0.8em; color:#2ecc71;">LIVE | 08:16 AM</div>
+                        <div style="text-align:right;"><div style="color:#2ecc71; font-weight:bold; font-size:0.85em;">MATLOGIC LIVE</div><div style="color:#576574; font-size:0.7em;">08:17 AM</div></div>
                     </div>
+                    <div class="bracket-header-row"><div class="header-cell">RD 12</div><div class="header-cell">RD 10</div><div class="header-cell">RD 9</div><div class="header-cell">RD 7</div><div class="header-cell">RD 6</div><div class="header-cell">RD 4</div><div class="header-cell">RD 3</div><div class="header-cell">RD 1</div><div class="header-cell">RD 2</div><div class="header-cell">RD 5</div><div class="header-cell">RD 8</div><div class="header-cell">RD 11</div></div>
                     <div class="bracket-body">
             <div class="round-col round-12">
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 170</div>
+                        <div class="match-title">3rd Place Match</div>
+                        <div class="bout-num">BOUT 170</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 171</div>
+                        <div class="match-title">5th Place Match</div>
+                        <div class="bout-num">BOUT 171</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    </div><div class="round-col">
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        
+                        <div class="bout-num">BOUT 162</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        
+                        <div class="bout-num">BOUT 163</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 162</div>
+                        
+                        <div class="bout-num">BOUT 155</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 163</div>
+                        
+                        <div class="bout-num">BOUT 156</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    </div><div class="round-col">
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        
+                        <div class="bout-num">BOUT 146</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        
+                        <div class="bout-num">BOUT 147</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        
+                        <div class="bout-num">BOUT 148</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        
+                        <div class="bout-num">BOUT 149</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 155</div>
+                        
+                        <div class="bout-num">BOUT 140</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 156</div>
+                        
+                        <div class="bout-num">BOUT 141</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        
+                        <div class="bout-num">BOUT 142</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        
+                        <div class="bout-num">BOUT 143</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 146</div>
+                        <div class="bout-num">BOUT 124</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 147</div>
+                        <div class="bout-num">BOUT 125</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 148</div>
+                        <div class="bout-num">BOUT 126</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 149</div>
+                        <div class="bout-num">BOUT 127</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        
+                        <div class="bout-num">BOUT 128</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        
+                        <div class="bout-num">BOUT 129</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        
+                        <div class="bout-num">BOUT 130</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        
+                        <div class="bout-num">BOUT 131</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 140</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 141</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 142</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 143</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    </div><div class="round-col">
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 124</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 125</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 126</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 127</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 128</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 129</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 130</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 131</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    </div><div class="round-col">
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 120</div>
+                        
+                        <div class="bout-num">BOUT 120</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 121</div>
+                        
+                        <div class="bout-num">BOUT 121</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 122</div>
+                        
+                        <div class="bout-num">BOUT 122</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Lincoln Demers</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 101</div>
+                        <div class="bout-num">BOUT 101</div>
                         <div class="player "><span>Eli Hamby</span><span class="score">0</span></div>
                         <div class="player "><span>Leo Moutran</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 103</div>
+                        <div class="bout-num">BOUT 103</div>
                         <div class="player "><span>CARSON EPLING</span><span class="score">0</span></div>
                         <div class="player "><span>Tshaka Curtis</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 102</div>
+                        <div class="bout-num">BOUT 102</div>
                         <div class="player "><span>Lucas Lane</span><span class="score">0</span></div>
                         <div class="player "><span>Bentley Rill</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Jace Younker</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 104</div>
+                        <div class="bout-num">BOUT 104</div>
                         <div class="player "><span>Elizabeth Bechtel</span><span class="score">0</span></div>
                         <div class="player "><span>Bryce Potter</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 105</div>
+                        <div class="bout-num">BOUT 105</div>
                         <div class="player "><span>Owen Zimmerman</span><span class="score">0</span></div>
                         <div class="player "><span>Jade Crow</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Mannix Miller</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Tyler Loiodice</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 106</div>
+                        <div class="bout-num">BOUT 106</div>
                         <div class="player "><span>Rowan Strube</span><span class="score">0</span></div>
                         <div class="player "><span>Kai Fung</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 107</div>
+                        <div class="bout-num">BOUT 107</div>
                         <div class="player "><span>Everett Arnold</span><span class="score">0</span></div>
                         <div class="player "><span>Liam DeVita</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 108</div>
+                        <div class="bout-num">BOUT 108</div>
                         <div class="player "><span>Lucas Bunai</span><span class="score">0</span></div>
                         <div class="player "><span>Emerson Swartz</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 109</div>
+                        <div class="bout-num">BOUT 109</div>
                         <div class="player "><span>Lane Miss</span><span class="score">0</span></div>
                         <div class="player "><span>Cannon Ross</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 110</div>
+                        <div class="bout-num">BOUT 110</div>
                         <div class="player "><span>RYKER MAXEY</span><span class="score">0</span></div>
                         <div class="player "><span>Everett Hart</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 111</div>
+                        <div class="bout-num">BOUT 111</div>
                         <div class="player "><span>Mark Miles</span><span class="score">0</span></div>
                         <div class="player "><span>Maxton Jacobs</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Nico Falzone</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 112</div>
+                        <div class="bout-num">BOUT 112</div>
                         <div class="player "><span>Lincoln Demers</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 113</div>
+                        <div class="bout-num">BOUT 113</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 114</div>
+                        <div class="bout-num">BOUT 114</div>
                         <div class="player "><span>Jace Younker</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 115</div>
+                        <div class="bout-num">BOUT 115</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>Mannix Miller</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 116</div>
+                        <div class="bout-num">BOUT 116</div>
                         <div class="player "><span>Tyler Loiodice</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 117</div>
+                        <div class="bout-num">BOUT 117</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 118</div>
+                        <div class="bout-num">BOUT 118</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 119</div>
+                        <div class="bout-num">BOUT 119</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>Nico Falzone</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 136</div>
+                        <div class="bout-num">BOUT 136</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 137</div>
+                        <div class="bout-num">BOUT 137</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 138</div>
+                        <div class="bout-num">BOUT 138</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 139</div>
+                        <div class="bout-num">BOUT 139</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    </div><div class="round-col">
+                    <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
+                        
+                        <div class="bout-num">BOUT 152</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
+                        
+                        <div class="bout-num">BOUT 153</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 152</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 153</div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                        <div class="player "><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    </div><div class="round-col">
-                    <div class="match-card ">
-                        
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 165</div>
+                        <div class="match-title">1st Place Match</div>
+                        <div class="bout-num">BOUT 165</div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                         <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>

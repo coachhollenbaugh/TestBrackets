@@ -2,152 +2,174 @@
             <!DOCTYPE html>
             <html>
             <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="refresh" content="30">
                 <style>
-                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; overflow-x: auto; }
                     .outer-container { display: inline-block; min-width: 100%; }
-                    .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; }
-                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 40px; min-height: 800px; }
+                    .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; position: sticky; left: 0; z-index: 100; }
+                    .bracket-header-row { display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px; }
+                    .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
                     
+                    .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 20px; min-height: 100vh; height: max-content; }
+                    
+                    /* The columns use space-around to create the vertical gaps */
                     .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; position: relative; }
-                    .round-12 { justify-content: center !important; gap: 150px; }
+                    .round-12 { justify-content: center !important; gap: 100px; }
                     
-                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; position: relative; width: 200px; margin: 20px 0; z-index: 5; }
+                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; position: relative; width: 200px; margin: 30px 0; z-index: 5; }
 
-                    /* Hide all lines if Round Robin is detected */
-                    .rr-event .match-card::before, .rr-event .match-card::after, .rr-event .v-line { display: none !important; }
+                    /* Horizontal stubs (15px) */
+                    .match-card::before, .match-card::after { content: ""; position: absolute; top: 50%; width: 15px; height: 2px; background: #3d4e5d; }
+                    .match-card::before { left: -16px; }
+                    .match-card::after { right: -16px; }
 
-                    /* Horizontal Stubs */
-                    .match-card::before, .match-card::after { content: ""; position: absolute; top: 50%; width: 20px; height: 2px; background: #3d4e5d; }
-                    .match-card::before { left: -21px; }
-                    .match-card::after { right: -21px; }
-
-                    /* Vertical Connectors */
+                    /* Vertical connectors at the end of the stubs */
                     .v-line { position: absolute; width: 2px; background: #3d4e5d; z-index: 1; }
-                    .v-left { left: -21px; }
-                    .v-right { right: -21px; }
+                    .v-left { left: -16px; }
+                    .v-right { right: -16px; }
 
-                    /* Logic to meet at midpoint: using a huge height and container clipping */
-                    /* Even (0,2,4) go down, Odd (1,3,5) go up */
-                    .v-down { top: 50%; height: 1000px; max-height: 55%; }
-                    .v-up { bottom: 50%; height: 1000px; max-height: 55%; }
+                    /* Midpoint Logic: The line grows until it hits the center of the gap */
+                    /* We use a large height and overflow:hidden is NOT used, but we'll cap them per round */
+                    .v-down { top: 50%; height: calc(50% + 20px); }
+                    .v-up { bottom: 50%; height: calc(50% + 20px); }
 
-                    /* Cleanup for Round 12 match 2 */
+                    /* Round Robin & Finals Cleanup */
                     .no-lines::before, .no-lines::after, .no-lines .v-line { display: none !important; }
-
-                    .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.9em; }
-                    .score { background: #000; padding: 0 5px; border-radius: 3px; min-width: 20px; text-align: center; }
+                    
+                    .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
+                    .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
+                    .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; align-items: center; }
                     .winner { color: #2ecc71; font-weight: bold; }
+                    .score { background: #000; padding: 0 6px; border-radius: 3px; min-width: 18px; text-align: center; }
                 </style>
             </head>
-            <body class="rr-event">
+            <body>
                 <div class="outer-container">
                     <div class="title-bar">
+                        <a href="index.html" style="color:#3498db; text-decoration:none; font-weight:bold;">← BACK</a>
                         <h2 style="margin:0;">B56 lbs</h2>
-                        <div style="font-size:0.8em; color:#2ecc71;">LIVE | 08:16 AM</div>
+                        <div style="text-align:right;"><div style="color:#2ecc71; font-weight:bold; font-size:0.85em;">MATLOGIC LIVE</div><div style="color:#576574; font-size:0.7em;">08:17 AM</div></div>
                     </div>
+                    <div class="bracket-header-row"><div class="header-cell">RD 9</div><div class="header-cell">RD 6</div><div class="header-cell">RD 4</div><div class="header-cell">RD 3</div><div class="header-cell">RD 11</div></div>
                     <div class="bracket-body">
             <div class="round-col">
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 157</div>
+                        
+                        <div class="bout-num">BOUT 157</div>
                         <div class="player "><span>Bentley Rill</span><span class="score">0</span></div>
                         <div class="player "><span>Cannon Ross</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 158</div>
+                        
+                        <div class="bout-num">BOUT 158</div>
                         <div class="player "><span>Emerson Swartz</span><span class="score">0</span></div>
                         <div class="player "><span>Tshaka Curtis</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 144</div>
+                        
+                        <div class="bout-num">BOUT 144</div>
                         <div class="player "><span>Bentley Rill</span><span class="score">0</span></div>
                         <div class="player "><span>Emerson Swartz</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                         <div class="player "><span>Cannon Ross</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                         <div class="player "><span>Tshaka Curtis</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bentley Rill</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                         <div class="player "><span>Emerson Swartz</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 132</div>
+                        <div class="bout-num">BOUT 132</div>
                         <div class="player "><span>Tshaka Curtis</span><span class="score">0</span></div>
                         <div class="player "><span>Cannon Ross</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Bentley Rill</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Tshaka Curtis</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card ">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 123</div>
+                        
+                        <div class="bout-num">BOUT 123</div>
                         <div class="player "><span>Cannon Ross</span><span class="score">0</span></div>
                         <div class="player "><span>Emerson Swartz</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 166</div>
+                        <div class="match-title">1st Place Match</div>
+                        <div class="bout-num">BOUT 166</div>
                         <div class="player "><span>Bentley Rill</span><span class="score">0</span></div>
                         <div class="player "><span>Tshaka Curtis</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="match-title">1st Place Match</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Cannon Ross</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
                     <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="match-title">1st Place Match</div>
+                        <div class="bout-num">BOUT 0</div>
                         <div class="player "><span>Emerson Swartz</span><span class="score">0</span></div>
                         <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
