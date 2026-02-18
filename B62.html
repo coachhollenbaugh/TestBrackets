@@ -12,34 +12,26 @@
                     .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
                     .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 20px; min-height: 100vh; height: max-content; }
                     
-                    /* The column is the anchor for the midpoints */
                     .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; position: relative; }
                     .round-12 { justify-content: center !important; gap: 120px; }
                     
                     .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; position: relative; width: 200px; margin: 25px 0; z-index: 5; }
 
                     /* Horizontal stubs */
-                    .match-card:not(.no-lines)::before, .match-card:not(.no-lines)::after { content: ""; position: absolute; top: 50%; width: 15px; height: 2px; background: #3d4e5d; }
+                    .match-card::before, .match-card::after { content: ""; position: absolute; top: 50%; width: 15px; height: 2px; background: #3d4e5d; }
                     .match-card::before { left: -16px; }
                     .match-card::after { right: -16px; }
 
-                    /* Vertical lines using flex-basis logic to find midpoints */
+                    /* Vertical Connectors */
                     .v-line { position: absolute; width: 2px; background: #3d4e5d; z-index: 1; }
                     .v-left { left: -16px; }
                     .v-right { right: -16px; }
 
-                    /* These grow to the exact midpoint of the flex container's gap */
-                    .v-down { top: 50%; height: 500%; max-height: calc(50% + 50px); top: 50%; }
-                    .v-up { bottom: 50%; height: 500%; max-height: calc(50% + 50px); bottom: 50%; }
-                    
-                    /* Round specific vertical stretches to ensure they meet */
-                    .rd-1 .v-down, .rd-1 .v-up { height: 60px; }
-                    .rd-2 .v-down, .rd-2 .v-up { height: 110px; }
-                    .rd-4 .v-down, .rd-4 .v-up { height: 210px; }
-                    .rd-7 .v-down, .rd-7 .v-up { height: 410px; }
-                    .rd-10 .v-down, .rd-10 .v-up { height: 810px; }
+                    /* High-precision height for mid-point intersection */
+                    .v-down { top: 50%; height: calc(50% + 15px); }
+                    .v-up { bottom: 50%; height: calc(50% + 15px); }
 
-                    .no-lines::before, .no-lines::after, .no-lines .v-line { display: none !important; }
+                    .no-lines::before, .no-lines::after { display: none !important; }
                     
                     .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
                     .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
@@ -53,11 +45,11 @@
                     <div class="title-bar">
                         <a href="index.html" style="color:#3498db; text-decoration:none; font-weight:bold;">← BACK</a>
                         <h2 style="margin:0;">B62 lbs</h2>
-                        <div style="text-align:right;"><div style="color:#2ecc71; font-weight:bold; font-size:0.85em;">MATLOGIC LIVE</div><div style="color:#576574; font-size:0.7em;">08:18 AM</div></div>
+                        <div style="text-align:right;"><div style="color:#2ecc71; font-weight:bold; font-size:0.85em;">MATLOGIC LIVE</div><div style="color:#576574; font-size:0.7em;">08:19 AM</div></div>
                     </div>
                     <div class="bracket-header-row"><div class="header-cell">RD 9</div><div class="header-cell">RD 6</div><div class="header-cell">RD 11</div></div>
                     <div class="bracket-body">
-            <div class="round-col rd-9">
+            <div class="round-col">
                     <div class="match-card ">
                         
                         
@@ -65,7 +57,7 @@
                         <div class="player "><span>Cooper Jackson</span><span class="score">0</span></div>
                         <div class="player "><span>TITUS SUTTON</span><span class="score">0</span></div>
                     </div>
-                    </div><div class="round-col rd-6">
+                    </div><div class="round-col">
                     <div class="match-card ">
                         
                         
@@ -73,7 +65,7 @@
                         <div class="player "><span>Cooper Jackson</span><span class="score">0</span></div>
                         <div class="player "><span>TITUS SUTTON</span><span class="score">0</span></div>
                     </div>
-                    </div><div class="round-col rd-11">
+                    </div><div class="round-col">
                     <div class="match-card ">
                         
                         <div class="match-title">1st Place Match</div>
