@@ -9,43 +9,18 @@
                     background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; 
                     margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh;
                 }
-                
                 .title-bar { 
                     padding: 10px 25px; background: #1e272e; display: flex; 
                     justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d;
                 }
+                .bracket-header-row { display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px; }
+                .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
+                .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 0 20px 20px 20px; flex-grow: 1; align-items: stretch; }
+                
+                .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; height: 100%; }
+                .round-12 { justify-content: center !important; gap: 40px; }
 
-                .bracket-header-row {
-                    display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px;
-                }
-                .header-cell {
-                    min-width: 220px; text-align: center; color: #f1c40f; 
-                    font-weight: bold; font-size: 1.1em;
-                }
-
-                .bracket-body { 
-                    display: flex; flex-direction: row; gap: 30px; padding: 0 20px 20px 20px;
-                    flex-grow: 1; align-items: stretch;
-                }
-
-                /* Default Spacing you liked */
-                .round-col { 
-                    display: flex; flex-direction: column; 
-                    justify-content: space-around; 
-                    min-width: 220px; height: 100%;
-                }
-
-                /* Specific override for Round 12 to center the anchor bout */
-                .round-12 {
-                    justify-content: center !important;
-                    gap: 40px;
-                }
-
-                .match-card { 
-                    background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
-                    padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-                }
-
+                .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
                 .bout-num { font-size: 0.7em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
                 .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; }
                 .winner { color: #2ecc71; font-weight: bold; }
@@ -63,14 +38,12 @@
                 <h2 style="margin:0;">B48 lbs</h2>
                 <div class="matlogic-brand">
                     <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
-                    <div class="sync-time">LAST SYNC: 05:32 PM</div>
+                    <div class="sync-time">LAST SYNC: 11:05 PM</div>
                 </div>
             </div>
-
             <div class="bracket-header-row">
                 <div class="header-cell">RD 9</div><div class="header-cell">RD 6</div><div class="header-cell">RD 4</div><div class="header-cell">RD 3</div><div class="header-cell">RD 11</div>
             </div>
-
             <div class="bracket-body">
         <div class="round-col ">
                 <div class="match-card">
