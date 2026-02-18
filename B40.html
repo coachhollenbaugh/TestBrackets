@@ -3,386 +3,390 @@
             <html>
             <head>
                 <style>
-                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: auto; }
+                    body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
                     .outer-container { display: inline-block; min-width: 100%; }
-                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 40px; min-height: 100vh; }
+                    .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; }
+                    .bracket-body { display: flex; flex-direction: row; gap: 40px; padding: 40px; min-height: 800px; }
                     
-                    /* Matrix Column Logic */
-                    .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; }
-                    .round-12 { justify-content: center !important; gap: 100px; }
+                    .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; position: relative; }
+                    .round-12 { justify-content: center !important; gap: 150px; }
                     
-                    .match-card { 
-                        background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; 
-                        padding: 10px; position: relative; width: 200px; margin: 20px 0; z-index: 10; 
-                    }
+                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; position: relative; width: 200px; margin: 20px 0; z-index: 5; }
 
-                    /* Connector Stubs */
-                    .stub { position: absolute; top: 50%; width: 20px; height: 2px; background: #3d4e5d; z-index: 5; }
-                    .stub-l { left: -20px; }
-                    .stub-r { right: -20px; }
+                    /* Hide all lines if Round Robin is detected */
+                    .rr-event .match-card::before, .rr-event .match-card::after, .rr-event .v-line { display: none !important; }
 
-                    /* Vertical Spine */
-                    .v-spine { position: absolute; width: 2px; background: #3d4e5d; z-index: 1; }
-                    .spine-l { left: -20px; }
-                    .spine-r { right: -20px; }
-                    
-                    /* These spans grow to fill the space between match stubs */
-                    .connector-space { flex-grow: 1; position: relative; min-height: 20px; }
+                    /* Horizontal Stubs */
+                    .match-card::before, .match-card::after { content: ""; position: absolute; top: 50%; width: 20px; height: 2px; background: #3d4e5d; }
+                    .match-card::before { left: -21px; }
+                    .match-card::after { right: -21px; }
 
-                    .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; }
+                    /* Vertical Connectors */
+                    .v-line { position: absolute; width: 2px; background: #3d4e5d; z-index: 1; }
+                    .v-left { left: -21px; }
+                    .v-right { right: -21px; }
+
+                    /* Logic to meet at midpoint: using a huge height and container clipping */
+                    /* Even (0,2,4) go down, Odd (1,3,5) go up */
+                    .v-down { top: 50%; height: 1000px; max-height: 55%; }
+                    .v-up { bottom: 50%; height: 1000px; max-height: 55%; }
+
+                    /* Cleanup for Round 12 match 2 */
+                    .no-lines::before, .no-lines::after, .no-lines .v-line { display: none !important; }
+
+                    .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.9em; }
+                    .score { background: #000; padding: 0 5px; border-radius: 3px; min-width: 20px; text-align: center; }
                     .winner { color: #2ecc71; font-weight: bold; }
-                    .score { background: #000; padding: 0 6px; border-radius: 3px; }
-                    .title-bar { padding: 10px 25px; background: #1e272e; border-bottom: 1px solid #3d4e5d; display: flex; justify-content: space-between; }
                 </style>
             </head>
-            <body>
+            <body class="">
                 <div class="outer-container">
                     <div class="title-bar">
-                        <h2>B40 lbs</h2>
-                        <div style="text-align:right; color:#2ecc71;">LIVE BRACKET | 08:14 AM</div>
+                        <h2 style="margin:0;">B40 lbs</h2>
+                        <div style="font-size:0.8em; color:#2ecc71;">LIVE | 08:16 AM</div>
                     </div>
                     <div class="bracket-body">
             <div class="round-col round-12">
-                    <div class="match-card">
+                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 234</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 234</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card no-lines">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 235</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 235</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 229</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 230</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 230</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 229</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
-                    <div class="match-card">
+                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 225</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 226</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 226</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 225</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 219</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 222</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>Jace McGrew</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 220</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 221</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 221</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 220</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 222</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>Jace McGrew</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 219</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
-                    <div class="match-card">
+                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Jace McGrew</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 215</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 216</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 216</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 215</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
+                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Jace McGrew</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     
-                    <div class="match-card">
-                        <div class="stub stub-l"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                        <div class="player"><span>Jace McGrew</span><span class="score">0</span></div>
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                        <div class="player "><span>Jace McGrew</span><span class="score">0</span></div>
                     </div>
                     </div><div class="round-col">
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Joaquin Medina</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Tyler Loiodice</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Jace McGrew</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Rebecca Linthicum</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Mark Miles</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Jace Younker</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Axton Plume</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Decker Parrish</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Mannix Miller</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Lincoln Demers</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Striker Chucoski</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Owen Douty</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div><div class="v-spine spine-l" style="height: calc(100% + 100px); top: 50%;"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Nico Falzone</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-l"></div><div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Jack Kelly</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    </div><div class="round-col">
-                    <div class="match-card">
-                        <div class="stub stub-r"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Joaquin Medina</span><span class="score">0</span></div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 201</div>
-                        <div class="player"><span>Tyler Loiodice</span><span class="score">4</span></div>
-                        <div class="player"><span>Jace McGrew</span><span class="score">3</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 202</div>
-                        <div class="player"><span>Rebecca Linthicum</span><span class="score">0</span></div>
-                        <div class="player"><span>Mark Miles</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 203</div>
-                        <div class="player"><span>Jace Younker</span><span class="score">0</span></div>
-                        <div class="player"><span>Axton Plume</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 204</div>
-                        <div class="player"><span>Decker Parrish</span><span class="score">0</span></div>
-                        <div class="player"><span>Mannix Miller</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 205</div>
-                        <div class="player"><span>Lincoln Demers</span><span class="score">0</span></div>
-                        <div class="player"><span>Striker Chucoski</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 206</div>
-                        <div class="player"><span>Owen Douty</span><span class="score">0</span></div>
-                        <div class="player"><span>Nico Falzone</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 0</div>
-                        <div class="player"><span>Bye</span><span class="score">0</span></div>
-                        <div class="player"><span>Jack Kelly</span><span class="score">0</span></div>
-                    </div>
-                    </div><div class="round-col">
-                    <div class="match-card">
-                        <div class="stub stub-r"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 211</div>
-                        <div class="player"><span>Joaquin Medina</span><span class="score">0</span></div>
-                        <div class="player"><span>Tyler Loiodice</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 212</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 213</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 214</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>Jack Kelly</span><span class="score">0</span></div>
-                    </div>
-                    </div><div class="round-col">
-                    <div class="match-card">
-                        <div class="stub stub-r"></div><div class="v-spine spine-r" style="height: calc(100% + 100px); top: 50%;"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 223</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    
-                    <div class="match-card">
-                        <div class="stub stub-r"></div>
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 224</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                    </div>
-                    </div><div class="round-col">
-                    <div class="match-card">
+                    <div class="match-card ">
                         
-                        <div style="font-size:0.7em; color:#f1c40f;">BOUT 231</div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
-                        <div class="player"><span>TBD</span><span class="score">0</span></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Joaquin Medina</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Tyler Loiodice</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Jace McGrew</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Rebecca Linthicum</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Mark Miles</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Jace Younker</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Axton Plume</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Decker Parrish</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Mannix Miller</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Lincoln Demers</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Striker Chucoski</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Owen Douty</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Nico Falzone</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Jack Kelly</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    </div><div class="round-col">
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Joaquin Medina</span><span class="score">0</span></div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 201</div>
+                        <div class="player winner"><span>Tyler Loiodice</span><span class="score">4</span></div>
+                        <div class="player "><span>Jace McGrew</span><span class="score">3</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 202</div>
+                        <div class="player "><span>Rebecca Linthicum</span><span class="score">0</span></div>
+                        <div class="player "><span>Mark Miles</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 203</div>
+                        <div class="player "><span>Jace Younker</span><span class="score">0</span></div>
+                        <div class="player "><span>Axton Plume</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 204</div>
+                        <div class="player "><span>Decker Parrish</span><span class="score">0</span></div>
+                        <div class="player "><span>Mannix Miller</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 205</div>
+                        <div class="player "><span>Lincoln Demers</span><span class="score">0</span></div>
+                        <div class="player "><span>Striker Chucoski</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-down"></div><div class="v-line v-right v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 206</div>
+                        <div class="player "><span>Owen Douty</span><span class="score">0</span></div>
+                        <div class="player "><span>Nico Falzone</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-left v-up"></div><div class="v-line v-right v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 0</div>
+                        <div class="player "><span>Bye</span><span class="score">0</span></div>
+                        <div class="player "><span>Jack Kelly</span><span class="score">0</span></div>
+                    </div>
+                    </div><div class="round-col">
+                    <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 211</div>
+                        <div class="player "><span>Joaquin Medina</span><span class="score">0</span></div>
+                        <div class="player "><span>Tyler Loiodice</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 212</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 213</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 214</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>Jack Kelly</span><span class="score">0</span></div>
+                    </div>
+                    </div><div class="round-col">
+                    <div class="match-card ">
+                        <div class="v-line v-right v-down"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 223</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    
+                    <div class="match-card ">
+                        <div class="v-line v-right v-up"></div>
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 224</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                    </div>
+                    </div><div class="round-col">
+                    <div class="match-card ">
+                        
+                        <div style="font-size:0.7em; color:#f1c40f; font-weight:bold;">BOUT 231</div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
+                        <div class="player "><span>TBD</span><span class="score">0</span></div>
                     </div>
                     </div></div></div></body></html>
