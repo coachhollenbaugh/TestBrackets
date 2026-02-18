@@ -7,19 +7,32 @@
                 <style>
                     body { background: #0f1418; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
                     .title-bar { padding: 10px 25px; background: #1e272e; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3d4e5d; flex-shrink: 0; }
-                    .bracket-header-row { display: flex; flex-direction: row; gap: 30px; padding: 15px 20px 5px 20px; flex-shrink: 0; }
+                    .bracket-header-row { display: flex; flex-direction: row; gap: 60px; padding: 15px 20px 5px 20px; flex-shrink: 0; }
                     .header-cell { min-width: 220px; text-align: center; color: #f1c40f; font-weight: bold; font-size: 1.1em; }
-                    .bracket-body { display: flex; flex-direction: row; gap: 30px; padding: 0 20px 20px 20px; flex-grow: 1; align-items: stretch; overflow-x: auto; overflow-y: hidden; }
-                    .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; height: 100%; }
-                    .round-12 { justify-content: center !important; gap: 60px; }
-                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative; }
-                    .match-title { position: absolute; top: -18px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
+                    .bracket-body { display: flex; flex-direction: row; gap: 60px; padding: 0 20px 20px 20px; flex-grow: 1; align-items: stretch; overflow-x: auto; overflow-y: hidden; }
+                    .round-col { display: flex; flex-direction: column; justify-content: space-around; min-width: 220px; height: 100%; position: relative; }
+                    .round-12 { justify-content: center !important; gap: 80px; }
+                    
+                    .match-card { background: #1e272e; border: 1px solid #3d4e5d; border-radius: 4px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); position: relative; z-index: 2; }
+                    
+                    /* Line Logic */
+                    .match-card::before, .match-card::after { content: ""; position: absolute; top: 50%; width: 31px; height: 2px; background: #3d4e5d; }
+                    .match-card::before { left: -31px; }
+                    .match-card::after { right: -31px; }
+                    
+                    /* Vertical Elbows (Thin lines, not blocks) */
+                    .hook-down-right::after { height: 50vh; top: 50%; border-right: 2px solid #3d4e5d; border-top: 2px solid #3d4e5d; }
+                    .hook-up-right::after   { height: 50vh; bottom: 50%; top: auto; border-right: 2px solid #3d4e5d; border-bottom: 2px solid #3d4e5d; }
+                    .hook-down-left::before  { height: 50vh; top: 50%; border-left: 2px solid #3d4e5d; border-top: 2px solid #3d4e5d; }
+                    .hook-up-left::before    { height: 50vh; bottom: 50%; top: auto; border-left: 2px solid #3d4e5d; border-bottom: 2px solid #3d4e5d; }
+
+                    .no-lines::before, .no-lines::after { display: none !important; }
+                    .match-title { position: absolute; top: -20px; left: 0; width: 100%; text-align: center; font-size: 0.75em; color: #f1c40f; font-weight: bold; text-transform: uppercase; }
                     .bout-num { font-size: 0.75em; color: #f1c40f; margin-bottom: 4px; font-weight: bold; }
-                    .source-tag { font-size: 0.8em; color: #e74c3c; font-weight: bold; margin-right: 5px; }
-                    .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; }
+                    .pin-label { color: #e74c3c; font-size: 0.7em; font-weight: bold; text-transform: uppercase; text-align: right; line-height: 1; margin-bottom: -2px; }
+                    .player { display: flex; justify-content: space-between; padding: 2px 0; font-size: 0.95em; align-items: center; }
                     .winner { color: #2ecc71; font-weight: bold; }
                     .score { background: #000; padding: 0 6px; border-radius: 3px; min-width: 18px; text-align: center; }
-                    .matlogic-text { color: #2ecc71; font-weight: bold; font-size: 0.85em; }
                 </style>
             </head>
             <body>
@@ -27,8 +40,8 @@
                     <a href="index.html" style="color:#3498db; text-decoration:none; font-weight:bold;">← BACK</a>
                     <h2 style="margin:0;">B62 lbs</h2>
                     <div style="text-align:right;">
-                        <div class="matlogic-text">AUTO-UPDATED BY MATLOGIC</div>
-                        <div style="color:#576574; font-size:0.7em;">LAST SYNC: 11:55 PM</div>
+                        <div style="color:#2ecc71; font-weight:bold; font-size:0.85em;">AUTO-UPDATED BY MATLOGIC</div>
+                        <div style="color:#576574; font-size:0.7em;">LAST SYNC: 11:58 PM</div>
                     </div>
                 </div>
                 <div class="bracket-header-row">
@@ -36,9 +49,10 @@
                 </div>
                 <div class="bracket-body">
             <div class="round-col ">
-                    <div class="match-card">
+                    <div class="match-card hook-down-right">
                         
                         <div class="bout-num">BOUT 159</div>
+                        
                         <div class="player ">
                             <span>Cooper Jackson</span><span class="score">0</span>
                         </div>
@@ -47,9 +61,10 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card">
+                    <div class="match-card hook-down-left">
                         
                         <div class="bout-num">BOUT 145</div>
+                        
                         <div class="player ">
                             <span>Cooper Jackson</span><span class="score">0</span>
                         </div>
@@ -58,9 +73,10 @@
                         </div>
                     </div>
                     </div><div class="round-col ">
-                    <div class="match-card">
+                    <div class="match-card no-lines">
                         <div class="match-title">1st Place Match</div>
                         <div class="bout-num">BOUT 167</div>
+                        
                         <div class="player ">
                             <span>Cooper Jackson</span><span class="score">0</span>
                         </div>
